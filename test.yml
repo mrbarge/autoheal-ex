@@ -6,7 +6,7 @@
 
   tasks:
     - name: Log in (obtain access token)
-      kubernetes.core.k8s_auth:
+      k8s_auth:
         username: "{{ k8s_user }}"
         password: "{{ k8s_password }}"
         host: "{{ k8s_host }}"
@@ -14,7 +14,7 @@
       register: k8s_auth_results
 
     - name: Scale DC
-      kubernetes.core.k8s_scale:
+      k8s_scale:
         api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
         api_version: apps.openshift.io/v1
         kind: DeploymentConfig
