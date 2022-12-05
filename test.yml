@@ -7,12 +7,14 @@
         username: "{{ k8s_user }}"
         password: "{{ k8s_password }}"
         host: "{{ k8s_host }}"
+        validate_certs: no
       register: k8s_auth_results
 
     - name: List pods
       k8s_info:
         api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
         kind: Pod
+        validate_certs: no
       register: pod_list
 
     - name: Scale DC
@@ -23,3 +25,4 @@
         name: rails-postgresql-example
         namespace: test-app
         replicas: 0
+        validate_certs: no
