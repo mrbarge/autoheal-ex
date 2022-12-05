@@ -1,7 +1,11 @@
-- name: Scale deploymentconfig
-  k8s_scale:
-    api_version: apps.openshift.io/v1
-    kind: DeploymentConfig
-    name: rails-postgresql-example
-    namespace: test-app
-    replicas: 0
+---
+- hosts: all
+  name: Scale deploymentconfig playbook
+  tasks:
+    - name: "scale dc"
+      k8s_scale:
+        api_version: apps.openshift.io/v1
+        kind: DeploymentConfig
+        name: rails-postgresql-example
+        namespace: test-app
+        replicas: 0
