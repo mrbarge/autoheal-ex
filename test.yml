@@ -6,7 +6,7 @@
 
   tasks:
     - name: Log in (obtain access token)
-      community.okd.k8s_auth:
+      community.okd.openshift_auth:
         username: "{{ k8s_user }}"
         password: "{{ k8s_password }}"
         host: "{{ k8s_host }}"
