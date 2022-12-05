@@ -1,6 +1,9 @@
 ---
 - hosts: all
   name: Scale deploymentconfig playbook
+  collections:
+  - community.okd
+
   tasks:
     - name: Log in (obtain access token)
       community.okd.k8s_auth:
