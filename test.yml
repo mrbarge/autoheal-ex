@@ -3,22 +3,15 @@
   name: Scale deploymentconfig playbook
   tasks:
     - name: Log in (obtain access token)
-      k8s_auth:
+      kubernetes.core.k8s_auth:
         username: "{{ k8s_user }}"
         password: "{{ k8s_password }}"
         host: "{{ k8s_host }}"
         validate_certs: no
       register: k8s_auth_results
 
-    - name: List pods
-      k8s_info:
-        api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
-        kind: Pod
-        validate_certs: no
-      register: pod_list
-
     - name: Scale DC
-      k8s_scale:
+      kubernetes.core.k8s_scale:
         api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
         api_version: apps.openshift.io/v1
         kind: DeploymentConfig
