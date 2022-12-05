@@ -1,9 +1,6 @@
 ---
 - hosts: all
   name: Scale deploymentconfig playbook
-  collections:
-  - kubernetes.core
-
   tasks:
     - name: Log in (obtain access token)
       k8s_auth:
