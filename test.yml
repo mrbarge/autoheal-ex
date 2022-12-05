@@ -1,6 +1,6 @@
 - name: Scale deploymentconfig
-  openshift_scale:
-    api_version: v1
+  k8s_scale:
+    api_version: apps.openshift.io/v1
     kind: DeploymentConfig
     name: rails-postgresql-example
     namespace: test-app
