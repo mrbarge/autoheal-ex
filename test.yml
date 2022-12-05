@@ -4,8 +4,9 @@
   tasks:
     - name: Log in (obtain access token)
       k8s_auth:
-        username: testuser
+        username: "{{ k8s_user }}"
         password: "{{ k8s_password }}"
+        host: "{{ k8s_host }}"
       register: k8s_auth_results
 
     - name: List pods
