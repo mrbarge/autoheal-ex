@@ -1,21 +1,23 @@
 ---
 - hosts: all
   name: Scale deploymentconfig playbook
+  collections:
+  - community.okd
+
   tasks:
     - name: Log in (obtain access token)
-      k8s_auth:
+      community.okd.k8s_auth:
         username: "{{ k8s_user }}"
         password: "{{ k8s_password }}"
         host: "{{ k8s_host }}"
         validate_certs: no
       register: k8s_auth_results
 
-    - name: Scale DC
-      k8s_scale:
+    - name: remove deployment
+      community.okd.k8s:
         api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
         api_version: apps.openshift.io/v1
-        kind: DeploymentConfig
-        name: rails-postgresql-example
-        namespace: test-app
-        replicas: 0
-        validate_certs: no
+        kind: deploymentconfig
+        state: absent
+        name: "{{ dc_name }}"
+        namespace: "{{ dc_ns }}"
